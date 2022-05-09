@@ -1,5 +1,5 @@
 import MovieStars from 'components/star';
-
+import './styles.css';
 interface MovieScoreProps {
   score: number;
   count: number;
