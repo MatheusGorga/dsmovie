@@ -1,5 +1,7 @@
+import Pagination from 'components/pagination';
+
 function Listing() {
-  return <div>ola</div>;
+  return <Pagination />;
 }
 
 export default Listing;
