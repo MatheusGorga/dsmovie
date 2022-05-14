@@ -8,10 +8,7 @@ interface MovieCardProps {
   count: number;
   score: number;
 }
-
-function MovieCard(props: MovieCardProps) {
-  const { id, image, title, count, score } = props;
-
+function MovieCard({ id, image, title, count, score }: MovieCardProps) {
   return (
     <div key={id}>
       <img className='dsmovie-movie-card-image' src={image} alt={title} />

@@ -5,15 +5,13 @@ interface MovieScoreProps {
   count: number;
 }
 
-function MovieScore(props: MovieScoreProps) {
-  const { score, count } = props;
-
+function MovieScore({ score, count }: MovieScoreProps) {
   return (
     <div className='dsmovie-score-container'>
       <p className='dsmovie-score-value'>
         {score > 0 ? score.toFixed(1) : '-'}
       </p>
-      <MovieStars />
+      <MovieStars score={score} />
       <p className='dsmovie-score-count'>{count} avaliações</p>
     </div>
   );
