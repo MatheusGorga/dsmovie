@@ -1,13 +1,11 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Movie } from 'types/movie';
 import { validateEmail } from 'types/validate';
 import { BASE_URL } from 'utils/requests';
 import './styles.css';
-
-import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
   movieId: string;
