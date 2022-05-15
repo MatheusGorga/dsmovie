@@ -8,6 +8,7 @@ interface MovieCardProps {
   count: number;
   score: number;
 }
+
 function MovieCard({ id, image, title, count, score }: MovieCardProps) {
   return (
     <div key={id}>
@@ -16,7 +17,7 @@ function MovieCard({ id, image, title, count, score }: MovieCardProps) {
         <h3>{title}</h3>
         <MovieScore score={score} count={count} />
 
-        <Link to={`/form/{id}`}>
+        <Link to={`/form/${id}`}>
           <div className='btn btn-primary dsmovie-btn'>Avaliar</div>
         </Link>
       </div>

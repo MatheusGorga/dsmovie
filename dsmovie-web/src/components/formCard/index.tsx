@@ -1,9 +1,13 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
 import { Movie } from 'types/movie';
+import { validateEmail } from 'types/validate';
 import { BASE_URL } from 'utils/requests';
 import './styles.css';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 type Props = {
   movieId: string;
@@ -19,6 +23,42 @@ function FormCard({ movieId }: Props) {
     });
   }, [movieId]);
 
+  const handleSubmit = (e: any) => {
+    e.preventDefault();
+
+    const email = (e.target as any).email.value;
+    const score = (e.target as any).score.value;
+
+    if (!validateEmail(email)) {
+      return;
+    }
+
+    const config: AxiosRequestConfig = {
+      baseURL: BASE_URL,
+      method: 'PUT',
+      url: '/scores',
+      data: {
+        email: email,
+        movieId: movieId,
+        score: score,
+      },
+    };
+
+    axios(config).then((response) => {
+      toast('Obrigado por sua avaliação', {
+        position: 'bottom-right',
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: 'dark',
+      });
+      navigate('/');
+    });
+  };
+
   return (
     <div className='dsmovie-form-container'>
       <img
@@ -28,7 +68,7 @@ function FormCard({ movieId }: Props) {
       />
       <div className='dsmovie-card-bottom-container'>
         <h3>{movie?.title}</h3>
-        <form className='dsmovie-form'>
+        <form className='dsmovie-form' onSubmit={handleSubmit}>
           <div className='form-group dsmovie-form-group'>
             <label htmlFor='email'>Informe seu email</label>
             <input type='email' className='form-control' id='email' />
@@ -44,11 +84,9 @@ function FormCard({ movieId }: Props) {
             </select>
           </div>
           <div className='dsmovie-form-btn-container'>
-            <Link to='/'>
-              <button type='submit' className='btn btn-primary dsmovie-btn'>
-                Salvar
-              </button>
-            </Link>
+            <button type='submit' className='btn btn-primary dsmovie-btn'>
+              Salvar
+            </button>
           </div>
         </form>
         <Link to='/'>
